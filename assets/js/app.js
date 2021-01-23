@@ -439,7 +439,7 @@ spReady(function() {
   }
 
   // Function for loading geojsons from the API
-  function loadMapGeojson(key, callback) {
+  function loadMapGeojson(key, checkbox, callback) {
 
     var layer = new L.LayerGroup();
 
@@ -454,6 +454,7 @@ spReady(function() {
           if(geojsons[key]['color'] != undefined) { style['color'] = geojsons[key]['color']; }
           if(geojsons[key]['weight'] != undefined) { style['weight'] = geojsons[key]['weight']; }
           if(geojsons[key]['opacity'] != undefined) { style['opacity'] = geojsons[key]['opacity']; }
+          if(geojsons[key]['visible'] == 'false') { checkbox.checked = false; }
 
           var geojson = L.geoJSON(geojsons[key]['geojson'], {
             style: style
@@ -567,7 +568,7 @@ spReady(function() {
 
           if(type=='geojson') {
 
-            loadMapGeojson(key, function(layer) {
+            loadMapGeojson(key, checkbox, function(layer) {
 
               // Add click function to filters
               checkbox.addEventListener("click", function () {
