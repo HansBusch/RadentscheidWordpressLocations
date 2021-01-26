@@ -15,22 +15,9 @@
     if($layers) {
     ?>
       <div class="sp-map-button sp-map-filter-button">
-        <span class="sp-map-button-icon">✔</span>
-        <span class="sp-map-button-label sp-hidden md:sp-block">Ebenen filtern</span>
+        <span class="sp-map-button-icon" title="Select Layer">âœ”</span>
       </div>
     <?PHP
-    }
-    ?>
-
-    <?PHP
-    // Draw custom map button
-    if($button_label) {
-      ?>
-        <a class="sp-map-button" href="<?=$button_link ?>">
-          <span class="sp-map-button-icon">🔔</span>
-          <span class="sp-map-button-label sp-hidden md:sp-block"><?=$button_label ?></span>
-        </a>
-      <?PHP
     }
     ?>
 
@@ -104,11 +91,6 @@
 
         ?>
 
-      <div class="sp-map-button sp-map-filter-close">
-        <span class="sp-map-button-icon">×</span>
-        <span class="sp-map-button-label">Schließen</span>
-      </div>
-
     </div>
     <?PHP
 
@@ -124,7 +106,7 @@ if($content) {
   ?>
   <div class="sp-modal sp-modal-welcome">
     <div class="sp-modal-content">
-      <div class="sp-modal-close sp-modal-close-trigger">×</div>
+      <div class="sp-modal-close sp-modal-close-trigger">Ã—</div>
 
       <?=$content ?>
 
