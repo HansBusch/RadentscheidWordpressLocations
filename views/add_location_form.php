@@ -1,5 +1,5 @@
 
-<form class="sp-xhr-form" method="post" action="/wp-admin/admin-ajax.php?action=splocationadd" <?=(get_option('sp-locations_rsa_enable')? 'data-enable-rsa-encryption="true" data-rsa-public-key="'.get_option('sp-locations_rsa_public_key').'"':'') ?>>
+<form class="sp-xhr-form" method="post" action="/wp/main/wp-admin/admin-ajax.php?action=splocationadd" <?=(get_option('sp-locations_rsa_enable')? 'data-enable-rsa-encryption="true" data-rsa-public-key="'.get_option('sp-locations_rsa_public_key').'"':'') ?>>
 
   <div class="sp-xhr-form-fields">
 
@@ -13,8 +13,9 @@
         </div>
 
         <div class="sp-has-margin-bottom-2">
-          <label for="type">Was möchtest du melden?</label>
+          <label for="type">Bitte wähle eine Kategorie!</label>
           <select required class="sp-xhr-form-data sp-xhr-form-input" name="type" id="type">
+            <option disabled selected value=""/>
             <?PHP
             foreach($available_types as $available_type) {
               $marker_key = get_post_meta($available_type->ID, 'key', true);
@@ -24,7 +25,6 @@
             }
             ?>
           </select>
-          <div class="sp-xhr-form-hint sp-has-text-red sp-hidden" data-input="type">Bitte wähle aus, was du melden möchtest!</div>
         </div>
 
         <div class="sp-has-margin-bottom-2">
