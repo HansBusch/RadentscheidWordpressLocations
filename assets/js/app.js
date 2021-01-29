@@ -621,7 +621,6 @@ spReady(function() {
       }
 
       var mapFilterButton = mapElement.querySelector(".sp-map-filter-button");
-      var mapFilterClose = mapElement.querySelector(".sp-map-filter-close");
       var mapFilters = mapElement.querySelector(".sp-map-filters");
 
       // Add filter button
@@ -631,7 +630,7 @@ spReady(function() {
       });
 
       // Add click to filter close button
-      mapFilterClose.addEventListener('click', function () {
+      mapFilters.addEventListener('mouseleave', function () {
         mapFilters.classList.remove('active');
         mapFilterButton.classList.add('active');
       });
