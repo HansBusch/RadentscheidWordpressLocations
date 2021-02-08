@@ -22,7 +22,7 @@ if($type) {
 
   if($type_posts) {
     ?>
-    <?=$type_posts[0]->post_title ?>
+    <div>Kategorie <?=$type_posts[0]->post_title ?></div>
     <?PHP
   }
 
@@ -81,7 +81,6 @@ if($opening_hours){
 }
 ?>
 
-<strong>Adresse</strong>
 <div class="sp-mini-map" data-zoom="18" data-icon="<?=$marker_icon ?>" data-lat="<?=get_post_meta($post_id, 'lat', true) ?>" data-lng="<?=get_post_meta($post_id, 'lng', true) ?>" data-title="<?=get_post_meta($post_id, 'title', true) ?>" data-type="<?=get_post_meta($post_id, 'type', true) ?>"></div>
 
 <p>
@@ -96,7 +95,7 @@ if($opening_hours){
   if(count($images)>1) {
 
     ?>
-    <strong>Weitere Bilder</strong>
+    <div>Weitere Bilder</div>
 
     <div class="sp-cards">
       <?php
@@ -142,7 +141,7 @@ if($opening_hours){
 $map_post_url = get_option('sp-locations_map_post_url');
 if(!empty($map_post_url)) {
   ?>
-  <a href="<?=$map_post_url ?>">Zurück zur Karte</a><br>
+  <div><a href="<?=$map_post_url ?>">Zurück zur Karte</a></div>
   <?PHP
 }
 ?>
@@ -151,9 +150,7 @@ if(!empty($map_post_url)) {
 $form_post_url = get_option('sp-locations_form_post_url');
 if(!empty($form_post_url)) {
   ?>
-  <a href="<?=$form_post_url ?>">Location melden</a><br>
+  <div><a href="<?=$form_post_url ?>">Weitere Location melden</a></div>
   <?PHP
 }
 ?>
-
-<a href="<?=get_site_url().'/location-print?location='.$post_id ?>" target="_blank">Druckansicht</a>
