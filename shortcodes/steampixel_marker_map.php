@@ -48,7 +48,7 @@ add_shortcode( 'steampixel-marker-map', function($atts = [], $content = null, $t
       array_push($query['meta_query'], [
         'key' => 'key',
         'value' => trim($type_key),
-        'compare' => '='
+        'compare' => 'LIKE'
       ]);
     }
   }
