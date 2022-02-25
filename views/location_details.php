@@ -103,8 +103,8 @@ foreach($updates as $update) {
 	$date = count($parts) > 1 ? $parts[0] : '- ohne Datum';
   ?>
   <div>
-    <div for="solution">Update <?=$date?></div>
-    <div style='margin-left:20px;'>
+    <div style='margin-top: var(--global--spacing-vertical);'for="solution"><h3>Update <?=$date?></h3></div>
+    <div style='margin-left:20px; margin-top: var(--global--spacing-vertical);'>
       <?=nl2br($text) ?>
     </div>
   </div>
