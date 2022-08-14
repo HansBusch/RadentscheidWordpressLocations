@@ -97,11 +97,18 @@ spReady(function() {
 
           if(locations[key]['marker'] != undefined) {
 
+			var iconpath = locations[key]['marker']['icon'];
+			if (locations[key]['type'] == 'solved_dot') {
+				var age = (Date.now() - Date.parse(locations[key]['date'])) / (24 * 3600* 1000);
+				if (age > 180) {
+					iconpath += '?age=' + age;
+				}
+			}
             // Create icon markup
             var icon = L.divIcon({
               className: '',
               iconSize:null,
-              html:'<div class="sp-map-marker sp-map-marker-'+locations[key]['type']+'" title="'+locations[key]['title']+'"><img style="height:100%;width:auto;" src="'+locations[key]['marker']['icon']+'"></div>'
+              html:'<div class="sp-map-marker sp-map-marker-'+locations[key]['type']+'" title="'+locations[key]['title']+'"><img style="height:100%;width:auto;" src="'+iconpath+'"></div>'
             });
 
             // Create new marker
