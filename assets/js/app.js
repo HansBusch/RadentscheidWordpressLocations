@@ -244,6 +244,10 @@ spReady(function() {
       var geojsonLayer = new L.LayerGroup();
       mymap.addLayer(geojsonLayer);
 
+      loadMapMarkers('dot', function (layer) {
+		markerClusterGroup.addLayer(layer);
+		});
+
       // Find filters
       var mapFilters = mapElement.getElementsByClassName("sp-map-filter");
 
