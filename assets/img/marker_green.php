@@ -10,8 +10,8 @@ $hue = 100 * ($age < 180 ? 1 : 180.0 / $age);
 $color = convertHSL(120, $hue, 74);
 
 // Echo the SVG content
-echo '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
-   <ellipse style="fill:'.$color.'" cx="50%" cy="50%" rx="15%" ry="15%"/>
+echo '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 10 10">
+   <ellipse style="fill:'.$color.'" cx="50%" cy="50%" rx="50%" ry="50%"/>
 </svg>';
 
 /**

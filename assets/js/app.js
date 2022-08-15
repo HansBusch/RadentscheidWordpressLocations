@@ -108,7 +108,7 @@ spReady(function() {
             var icon = L.divIcon({
               className: '',
               iconSize:null,
-              html:'<div class="sp-map-marker sp-map-marker-'+locations[key]['type']+'" title="'+locations[key]['title']+'"><img style="height:100%;width:auto;" src="'+iconpath+'"></div>'
+              html:'<div title="'+locations[key]['title']+'"><img src="'+iconpath+'"></div>'
             });
 
             // Create new marker
@@ -252,7 +252,16 @@ spReady(function() {
       mymap.addLayer(geojsonLayer);
 
       loadMapMarkers('dot', function (layer) {
-		markerClusterGroup.addLayer(layer);
+		mymap.addLayer(layer);
+		//markerClusterGroup.addLayer(layer);
+
+		mymap.on('zoomend', function() {
+			if (mymap.getZoom() < 14){
+				mymap.removeLayer(layer);
+			}else{
+				mymap.addLayer(layer);
+			}
+		  });
 		});
 
       // Find filters
