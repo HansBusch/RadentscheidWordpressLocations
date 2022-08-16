@@ -100,7 +100,7 @@ spReady(function() {
 			var iconpath = locations[key]['marker']['icon'];
 			var iconclass = 'class="sp-map-marker ';
 			if (locations[key]['type'] == 'solved_dot') {
-				iconclass = '';
+				iconclass = 'class="sp-map-dot ';
 				var age = (Date.now() - Date.parse(locations[key]['date'])) / (24 * 3600* 1000);
 				if (age > 180) {
 					iconpath += '?age=' + age;
