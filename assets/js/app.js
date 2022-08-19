@@ -130,7 +130,7 @@ spReady(function() {
             }
 			var blog = locations[key]['blog'];
             if(blog != undefined) bubbleHtml+= '<table class="bloglink"><tr><td>';
-            if (descr.length > 100) bubbleHtml+= ' <a href="'+locations[key]['url']+'" target="_blank">Details</a><br>';
+            if (descr != undefined && descr.length > 100) bubbleHtml+= ' <a href="'+locations[key]['url']+'" target="_blank">Details</a><br>';
             if(blog != undefined) {
 				bubbleHtml+= '</td><td style="text-align:right">'+blog+'</td></tr></table>';
 			}
