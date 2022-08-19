@@ -11,7 +11,9 @@
           <input id="title" required minlength="1" maxlength="200" placeholder="<?=$name_placeholder ?>" class="sp-xhr-form-data sp-xhr-form-input" type="text" name="title">
           <div class="sp-xhr-form-hint sp-has-text-red sp-hidden" data-input="title">Bitte gib einen Titel ein!</div>
         </div>
-
+        <?PHP
+			$isEditor = current_user_can('editor') || current_user_can('administrator');
+        ?>
         <div class="sp-has-margin-bottom-2">
           <label for="type">Bitte wähle eine Kategorie!</label>
           <select required class="sp-xhr-form-data sp-xhr-form-input" name="type" id="type">
@@ -23,6 +25,12 @@
               <option value="<?=$marker_key?>" <?=($selected_type==$marker_key? 'selected':'') ?>><?=$available_type->post_title ?></option>
               <?PHP
             }
+			if ($isEditor) {
+              ?>
+              <option value="solved_dot">Dot</option>
+              <option value="solved_bike">Bike OK</option>
+              <?PHP
+			}
             ?>
           </select>
         </div>
@@ -170,7 +178,9 @@
 
     <div class="sp-columns sp-has-margin-bottom-2">
       <div class="sp-column is-full">
-
+		<?PHP
+		if (!$isEditor) {
+		?>
         <div class="sp-has-margin-bottom-2">
           <label>
             <input name="privacy" type="checkbox" class="sp-xhr-form-data" required>
@@ -184,6 +194,9 @@
             <div class="sp-xhr-form-hint sp-has-text-red sp-hidden" data-input="privacy">Bitte bestätige die Datenschutzbestimmungen!</div>
           </label>
         </div>
+		<?PHP
+		}
+		?>
 
         <div>
           <?php wp_nonce_field( 'sp_location_add' ); ?>
@@ -193,7 +206,6 @@
 
       </div>
     </div>
-
   </div>
 
   <div class="sp-xhr-form-wait sp-hidden">
@@ -210,8 +222,18 @@
   </div>
 
   <div class="sp-xhr-form-success sp-hidden sp-has-text-green">
+		<?php
+		if ($isEditor) {
+		?>
+    Post hinzugefügt.
+		<?php
+		} else {
+		?>
     Vielen Dank! Wir prüfen deine Daten und setzen uns so schnell wie möglich mit dir in Verbindung.
     Danach schalten wir den Ort auf unserer interaktiven Karte frei.
+		<?php
+		}
+		?>
   </div>
 
 </form>

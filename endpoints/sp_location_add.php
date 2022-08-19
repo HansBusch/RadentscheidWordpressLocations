@@ -2,6 +2,8 @@
 
 function sp_location_add () {
 
+  $isEditor = current_user_can('editor') || current_user_can('administrator');
+
   // Sanitize the required whole input
   $_POST['title'] = filter_var ( $_POST['title'], FILTER_SANITIZE_STRING);
   $_POST['lat'] = filter_var ( $_POST['lat'], FILTER_SANITIZE_STRING);
@@ -186,21 +188,28 @@ function sp_location_add () {
       add_post_meta($post_id, 'telephone', $_POST['telephone']);
     }
 
-    // Send mail(s)
-    $emails = get_option('sp-locations_notify_email');
-    if(!empty($emails)) {
-      $email_addresses = preg_split('/\r\n|\r|\n/', $emails);
-      $email_addresses = array_map('trim', $email_addresses);
-      $site = get_bloginfo('name');
-      $message = "Hey! Aktivisti haben soeben eine neue Location auf deiner Website '".$site."' gemeldet.\r\n";
-      $message.= "Name der Location: ".$_POST['title']."\r\n";
-      $message.= "Melde dich an, um die Location zu prüfen und freizuschalten.\r\n";
-      $message.= "https://schwabach-bewegen.de/review?id=".$post_id."\r\n";
-      foreach($email_addresses as $email_address) {
-        wp_mail( $email_address, 'Neue Location auf '.$site, $message);
-      }
-    }
-
+	if ($isEditor) {
+		 wp_update_post(array(
+			'ID'    =>  $post_id,
+			'post_status'   =>  'publish'
+        ));
+	}
+	else {
+		// Send mail(s)
+		$emails = get_option('sp-locations_notify_email');
+		if(!empty($emails)) {
+		  $email_addresses = preg_split('/\r\n|\r|\n/', $emails);
+		  $email_addresses = array_map('trim', $email_addresses);
+		  $site = get_bloginfo('name');
+		  $message = "Hey! Aktivisti haben soeben eine neue Location auf deiner Website '".$site."' gemeldet.\r\n";
+		  $message.= "Name der Location: ".$_POST['title']."\r\n";
+		  $message.= "Melde dich an, um die Location zu prüfen und freizuschalten.\r\n";
+		  $message.= "https://schwabach-bewegen.de/review?id=".$post_id."\r\n";
+		  foreach($email_addresses as $email_address) {
+			wp_mail( $email_address, 'Neue Location auf '.$site, $message);
+		  }
+		}
+	}
     echo json_encode([
       "status"  =>  "success"
     ]);
