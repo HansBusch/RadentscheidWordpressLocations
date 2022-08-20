@@ -173,6 +173,9 @@ function sp_location_add () {
     if(isset($_POST['solution'])){
       add_post_meta($post_id, 'solution', $_POST['solution']);
     }
+    if(isset($_POST['blog'])){
+      add_post_meta($post_id, 'blog', $_POST['blog']);
+    }
 
     // Add personal data
     if(isset($_POST['rsa_public_key'])){

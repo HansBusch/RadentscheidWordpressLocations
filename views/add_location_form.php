@@ -144,7 +144,9 @@
         </div>
       </div>
     </div>
-
+	<?PHP
+	if (!$isEditor) {
+	?>
     <div class="sp-columns">
       <div class="sp-column is-full">
 
@@ -175,7 +177,21 @@
       </div>
 
     </div>
+	<?PHP
+	} else {
+	?>
+    <div class="sp-columns enable-wrap">
 
+      <div class="sp-column is-full is-half-tablet sp-has-padding-right-1-tablet">
+        <div class="sp-has-margin-bottom-2">
+          <label for="blog">Blog link (optional)</label>
+          <input minlength="1" maxlength="200" placeholder="Post ID" class="sp-xhr-form-data sp-xhr-form-input" type="number" name="blog" id="blog">
+        </div>
+      </div>
+    </div>
+	<?PHP
+	} 
+	?>
     <div class="sp-columns sp-has-margin-bottom-2">
       <div class="sp-column is-full">
 		<?PHP
