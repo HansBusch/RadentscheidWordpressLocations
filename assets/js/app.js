@@ -254,11 +254,12 @@ spReady(function() {
       mymap.addLayer(geojsonLayer);
 
       loadMapMarkers('dot', function (layer) {
-		mymap.addLayer(layer);
+		if (mymap.getZoom() >= 15)
+			mymap.addLayer(layer);
 		//markerClusterGroup.addLayer(layer);
 
 		mymap.on('zoomend', function() {
-			if (mymap.getZoom() < 14){
+			if (mymap.getZoom() < 15){
 				mymap.removeLayer(layer);
 			}else{
 				mymap.addLayer(layer);
