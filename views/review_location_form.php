@@ -46,17 +46,25 @@ if ($action) {
 }
 if ($next) {
     $query = new WP_Query ( array ( 'post_type' => 'location', 'post_status' => 'draft', 'posts_per_page' => -1));
-    $pending = array_reverse($query->posts);
+    $pending = $query->posts;
     if (count($pending) > 0) {
-        ?> <h2><?=count($pending) ?> reviews pending.</h2> <?PHP
+        ?> <h2><?=count($pending) ?> Reviews offen.</h2> <?PHP
         $i = 0;
-        for (; $i < count($pending); $i++) {
-            if ($pending[$i]->ID > $post_id) break;
+        if ($post_id == 0) {
+            $post = $pending[0];
+            $post_id = $pending[0]->ID;
+            ?> <h4>Last post <?=$post_id ?> <?PHP
         }
-        if ($i >= count($pending)) $i = 0;
-        $post = $pending[$i];
-        $post_id = $post->ID;
-        ?> <h2>Advance to <?=$post_id ?></h2> <?PHP
+        else {
+            for (; $i < count($pending); $i++) {
+                if ($post_id == 0 || $pending[$i]->ID < $post_id) break;
+            }
+            if ($i >= count($pending)) $i = 0;
+            $post = $pending[$i];
+            $post_id = $post->ID;
+            ?> <h4>Advance to <?=$post_id ?><?PHP
+        }
+        ?> vom <?= get_the_time('d.m.Y', $post->ID) ?></h4> <?PHP
     }
     else {
         ?> <h2>No pending reviews.</h2> <?PHP
@@ -259,3 +267,4 @@ if ($post->post_status == 'publish' ) {
   </div>
 
 </form>
+
